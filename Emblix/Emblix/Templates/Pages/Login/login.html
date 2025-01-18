@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в онлайн кинотеатр emblix</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="/assets/js/validation.js"></script>
+</head>
+<body>
+<main>
+    <div class="container-fluid px-0">
+        <div class="position-fixed" style="left: 0; top: 0; bottom: 0;">
+            <button class="btn btn-link btn-nav h-100">
+                <i class="fas fa-fw fa-chevron-left fa-2x"></i>
+            </button>
+        </div>
+        <div class="position-fixed" style="right: 0; top: 0; bottom: 0;">
+            <button class="btn btn-link btn-nav h-100">
+                <i class="fas fa-fw fa-chevron-right fa-2x"></i>
+            </button>
+        </div>
+        <div class="row no-gutters">
+            <div class="col sith">
+                <section class="bg-white">
+                    <section class="container bg-white">
+                        <div class="row justify-content-center no-gutters">
+                            <div class="col-md-11 col-sm-12 col-xs-12 pt-sm-5 pt-2 pb-3 px-sm-2 px-0">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex flex-sm-row flex-column">
+                                            <div class="d-flex flex-row align-items-end mr-2">
+                                                <div class="h4 pb-0 mb-0 ml-1 mr-2 d-none d-sm-block">
+                                                    <button type="button" class="btn btn-link btn-h-sm p-0 text-decoration-none" tabindex="0">
+                                                        <i class="fas fa-lg fa-fw fa-fire-alt text-danger"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="h1 pb-0 mb-0">
+                                                    <a class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left btn-h" href="/emblix">
+                                                        <span class="text-body">emblix</span>
+                                                    </a>
+                                                </div>
+                                                <div class="h4 pb-0 mb-0 d-sm-none">
+                                                    <button type="button" routerlink="/" class="btn btn-link btn-h-sm p-0 text-decoration-none" tabindex="0">
+                                                        <i class="fas fa-lg fa-fw fa-fire-alt text-danger"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-end mt-sm-0 mt-2">
+                                                <div class="h3 pb-0 mb-0">
+                                                    <a routerlinkactive="btn-h" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left" href="/emblix">
+                                                        Фильмы
+                                                    </a><!---->
+                                                    <a routerlinkactive="btn-h" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left" href="/emblix">
+                                                        Сериалы
+                                                    </a><!---->
+                                                    <a routerlinkactive="btn-h" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left" href="/emblix">
+                                                        Аниме
+                                                    </a><!---->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end">
+                                        <div class="d-flex flex-sm-row flex-column">
+                                            <div class="h3 pb-0 mb-0">
+                                                <a class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left btn-h" href="/auth">
+                                                    войти
+                                                </a>
+                                                <button type="button" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-danger text-left">
+                                                    <i class="fas fa-lg fa-fw fa-adjust"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="container bg-white">
+                        <div class="row justify-content-center">
+                            <div class="col-md-11 col-sm-12 pb-3">
+                                <form novalidate="" autocomplete="off" class="d-flex ng-untouched ng-pristine ng-valid">
+                                    <div class="input-group flex-grow-1">
+                                        <button type="submit" title="поиск фильма, сериала, мультфильма, актера..." class="btn btn-link btn-input-prepend" style="color: #757575!important;">
+                                            <i class="fas fa-search fa-fw fa-lg"></i>
+                                        </button>
+
+                                        <input type="text" placeholder="поиск" formcontrolname="query" aria-label="поиск фильма, сериала, мультфильма, актера..." title="поиск фильма, сериала, мультфильма, актера..." aria-describedby="button-search" rel="nofollow" class="form-control form-control-plaintext form-control-lg bg-light py-3 w-100 ng-untouched ng-pristine ng-valid" value="">
+
+                                        <!---->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                    <div>
+                        <section class="container-fluid movie-cover">
+                            <div class="row justify-content-center">
+                                <div class="col-md-11 col-sm-12">
+                                    <div class="d-flex mh-580 h-expanded align-items-center">
+                                        <div class="w-100">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-7 col-sm-11">
+                                                    <h3 class="text-white font-weight-bold my-4 ml-sm-2 ml-0">
+                                                        Вход
+                                                    </h3>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="card border-0 bg-light shadow-sm mb-2">
+                                                                <div class="card-body">
+                                                                    <form action="/login" method="post" onsubmit="return validateLoginForm()">
+                                                                        <div class="form-group">
+                                                                            <input type="email"
+                                                                                   name="email"
+                                                                                   id="email"
+                                                                                   required
+                                                                                   value="{{email}}"
+                                                                                   class="form-control form-control-plaintext form-control-lg bg-white p-3"
+                                                                                   placeholder="Введите e-mail">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <input type="password"
+                                                                                   name="password"
+                                                                                   id="password"
+                                                                                   required
+                                                                                   class="form-control form-control-plaintext form-control-lg bg-white p-3"
+                                                                                   placeholder="Введите пароль">
+                                                                        </div>
+                                                                        {{#if error}}
+                                                                        <div class="alert alert-danger">{{error}}</div>
+                                                                        {{/if}}
+                                                                        <div class="d-flex justify-content-between align-items-center">
+                                                                            <div>
+                                                                                <button type="submit" class="btn btn-dark">Войти</button>
+                                                                            </div>
+                                                                            <div class="text-muted">
+                                                                                <i class="fas fa-at fa-fw fa-lg"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <section class="bg-white mt-5 pb-5 sith-apprentice">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-11 col-sm-12">
+                                        <h1 class="h3 font-weight-bold mb-4 ml-sm-2 ml-0 mr-sm-5 mr-0">
+                                            Простая и безопасная регистрация в 2 клика откроет Вам доступ к скрытым возможностям онлайн кинотеатра <span class="text-danger font-weight-bold">emblix</span>.
+                                        </h1>
+                                        <p>
+                                            После регистрации вам откроются дополнительные, полезные функции:
+                                        </p>
+                                        <ul>
+                                            <li>Возможность скачивать фильмы, мультики, аниме и сериалы на Ваши устройства в высоком качестве 720, 1080 Hd;</li>
+                                            <li>Ставить оценки, писать рецензии и обсуждать новинки и классические картины с другими пользователями Эмбликс;
+                                            </li>
+                                            <li>Подписываться на обновление качества видео и дубляжа, уведомления о выпуске новых эпизодов сериалов и выхода
+                                                новых блокбастеров;</li>
+                                            <li>Делиться контентом с друзьями и близкими;</li>
+                                            <li>Добавлять в избранное;</li>
+                                            <li>Доступ к истории просмотренных кинокартин;</li>
+                                            <li>Форма технической поддержки прямо в профиле!</li>
+                                        </ul>
+                                        <p>Бесплатно и без СМС для каждого пользователя.</p>
+                                        <h2 class="h3 font-weight-bold mb-4 ml-sm-2 ml-0 mt-5 mr-sm-5 mr-0">
+                                            Ваши личные данные под защитой!
+                                        </h2>
+                                        <p>
+                                            Регистрация совершенно безопасная, поддерживается нашей <a routerlink="/policy" title="политика конфиденциальности" class="text-danger font-weight-bold" href="#" onclick="return false;">политикой конфиденциальности</a>, законодательством
+                                            Российской Федерации и службами информационной защиты Яндекс, Google, ВКонтакте и Facebook.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="bg-black footer mt-auto">
+                            <div class="container">
+                                <div class="row justify-content-md-center">
+                                    <div class="col-md-11 col-sm-12">
+                                        <div class="row mt-5 mb-5">
+                                            <div class="col-md-9">
+                                                <ul class="nav mt-1">
+                                                    <li class="nav-item">
+                                                        <a routerlink="/policy" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                            Политика конфиденциальности
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a routerlink="/abuse" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                            Правообладателям
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a routerlink="/feedback" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                            Контакты
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a routerlink="/donate" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                            Донаты
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a routerlink="/apps" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                            Приложения
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a routerlink="/updates" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                            Обновления
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a routerlink="/persons" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                            База актеров
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a routerlink="/collections" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                            Коллекции
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <ul class="nav justify-content-md-end mt-sm-0 mt-4">
+                                                    <li class="nav-item">
+                                                        <a href="https://t.me/emblix" target="_blank" rel="noopener noreferrer nofollow" title="Телеграм" class="nav-link text-light">
+                                                            <i class="fab fa-fw fa-telegram-plane fa-2x"></i>
+                                                        </a>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <a href="https://vk.com/emblix" target="_blank" rel="noopener noreferrer nofollow" title="ВКонтакте" class="nav-link text-light">
+                                                            <i class="fab fa-fw fa-vk fa-2x"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        
+                        
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

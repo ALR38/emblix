@@ -1,0 +1,748 @@
+﻿<!DOCTYPE html>
+<html prefix="og: //ogp.me/ns#" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Основные метатеги -->
+    <title>{{Title}} ({{ReleaseYear}}) - Emblix</title>
+    <meta name="description" content="{{Description}}">
+    <meta name="keywords" content="смотреть {{Title}}, {{OriginalTitle}}, {{ReleaseYear}}, {{#each MovieGenres}}{{Name}}{{#unless @last}}, {{/unless}}{{/each}}">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{Title}} ({{ReleaseYear}})">
+    <meta property="og:description" content="{{Description}}">
+    <meta property="og:image" content="{{PosterUrl}}">
+    <meta property="og:url" content="https://emblix.ru/movie/{{Slug}}">
+    <meta property="og:type" content="video.movie">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon.png">
+
+    <!-- Стили -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+
+</head>
+<body>
+<main>
+    <div class="container-fluid px-0">
+        <!-- Навигация по сторонам -->
+        <div class="position-fixed" style="left: 0; top: 0; bottom: 0;">
+            <button class="btn btn-link btn-nav h-100">
+                <i class="fas fa-fw fa-chevron-left fa-2x"></i>
+            </button>
+        </div>
+        <div class="position-fixed" style="right: 0; top: 0; bottom: 0;">
+            <button class="btn btn-link btn-nav h-100">
+                <i class="fas fa-fw fa-chevron-right fa-2x"></i>
+            </button>
+        </div>
+
+        <div class="row no-gutters">
+            <div class="col sith">
+                <section class="bg-white">
+                    <section class="container bg-white">
+                        <div class="row justify-content-center no-gutters">
+                            <div class="col-md-11 col-sm-12 col-xs-12 pt-sm-5 pt-2 pb-3 px-sm-2 px-0">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex flex-sm-row flex-column">
+                                            <!-- Логотип -->
+
+
+                                            <div class="d-flex flex-row align-items-end mr-2">
+                                                <div class="h4 pb-0 mb-0 ml-1 mr-2 d-none d-sm-block">
+                                                    <button type="button" routerlink="/" class="btn btn-link btn-h-sm p-0 text-decoration-none" tabindex="0">
+                                                        <i class="fas fa-lg fa-fw fa-fire-alt text-danger"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="h1 pb-0 mb-0">
+                                                    <a routerlink="/" routerlinkactive="btn-h" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left btn-h" href="/emblix">
+                                                        <span class="text-body">emblix</span>
+                                                    </a>
+                                                </div>
+                                                <div class="h4 pb-0 mb-0 d-sm-none">
+                                                    <button type="button" routerlink="/" class="btn btn-link btn-h-sm p-0 text-decoration-none" tabindex="0">
+                                                        <i class="fas fa-lg fa-fw fa-fire-alt text-danger"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-end mt-sm-0 mt-2">
+                                                <div class="h3 pb-0 mb-0">
+                                                    <a routerlinkactive="btn-h" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left" href="/emblix">
+                                                        Фильмы
+                                                    </a><!---->
+                                                    <a routerlinkactive="btn-h" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left" href="/emblix">
+                                                        Сериалы
+                                                    </a><!---->
+                                                    <a routerlinkactive="btn-h" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left" href="/emblix">
+                                                        Аниме
+                                                    </a><!---->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                            
+                                            
+
+
+                                    <!-- Правое меню -->
+                                    <div class="d-flex align-items-end">
+                                        <div class="d-flex flex-sm-row flex-column">
+                                            <div class="h3 pb-0 mb-0">
+                                                {{#if IsAuthorized}}
+                                                <a href="#" onclick="return false;" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left">
+                                                    Профиль
+                                                </a>
+                                                {{else}}
+                                                <a href="/auth" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-body text-left">
+                                                    войти
+                                                </a>
+                                                {{/if}}
+                                                <button type="button" class="btn btn-link btn-h-sm p-0 mr-2 text-decoration-none font-weight-bold text-danger text-left theme-toggle">
+                                                    <i class="fas fa-lg fa-fw fa-adjust"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Поиск -->
+                    <section class="container bg-white">
+                        <div class="row justify-content-center">
+                            <div class="col-md-11 col-sm-12 pb-3">
+                                <form novalidate="" autocomplete="off" class="d-flex">
+                                    <div class="input-group flex-grow-1">
+                                        <button type="submit" title="поиск фильма, сериала, мультфильма, актера..." class="btn btn-link btn-input-prepend" style="color: #757575!important;">
+                                            <i class="fas fa-search fa-fw fa-lg"></i>
+                                        </button>
+
+                                        <input type="text" placeholder="поиск" name="query" aria-label="поиск фильма, сериала, мультфильма, актера..." title="поиск фильма, сериала, мультфильма, актера..." aria-describedby="button-search" rel="nofollow" class="form-control form-control-plaintext form-control-lg bg-light py-3 w-100">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                    
+
+                    <!-- Хлебные крошки -->
+                    <section>
+                        <div class="container bg-white hansel-breadcrumb">
+                            <div class="row justify-content-center mt-0 mb-0">
+                                <div class="col-md-11 col-sm-12">
+                                    <nav aria-label="breadcrumb" class="mx-sm-1 mx-0">
+                                        <ol class="breadcrumb mx-sm-2">
+                                            <li class="breadcrumb-item">
+                                                <a routerlink="/emblix" title="Главная" class="text-black text-decoration-none font-weight-bold" href="/emblix">
+                                                    <i class="fas fa-lg fa-fw fa-fire-alt text-muted">
+                                                        <span class="sr-only">Главная</span>
+                                                    </i>
+                                                </a>
+                                            </li>
+                                            <li class="breadcrumb-item">
+                                                <a class="text-dark text-decoration-none font-weight-bold" href="/emblix">
+                                                    Фильмы
+                                                </a>
+                                            </li>
+                                            {{#each MovieGenres}}
+                                            <li class="breadcrumb-item">
+                                                <a class="text-dark text-decoration-none font-weight-bold" href="/emblix?query=&genre={{Slug}}">
+                                                    {{Name}}
+                                                </a>
+                                            </li>
+                                            {{/each}}
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+                    
+                    <section itemscope itemtype="http://schema.org/Movie" class="movie-cover" style="background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('{{BackgroundUrl}}');">
+                        <meta itemprop="duration" content="{{Duration}} мин">
+                        <meta itemprop="datePublished" content="{{ReleaseYear}}">
+                        <meta itemprop="inLanguage" content="ru">
+
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-md-11 col-sm-12">
+                                    <div class="ml-sm-2 ml-0 d-flex align-items-end mh-580 h-expanded">
+                                        <div class="w-100">
+                                            <div class="row align-items-end">
+                                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                                    <div class="text-white">
+                                                        <h1 itemprop="name" class="movie-cover-title font-weight-bold mb-1 mt-5">
+                                                            {{Title}}
+                                                        </h1>
+                                                        <h2 itemprop="alternativeHeadline" class="h5" style="font-weight: 400;">
+                                                            {{OriginalTitle}}
+                                                        </h2>
+                                                        <div class="row">
+                                                            <div class="col-lg-11 col-md-12 col-sm-12 col-xs-10">
+                                                                <p itemprop="genre" class="mt-1 mb-0">{{ReleaseYear}}, {{Country}},
+                                                                    {{#each MovieGenres}}
+                                                                    {{Name}}{{#unless @last}}, {{/unless}}
+                                                                    {{/each}}
+                                                                </p>
+                                                                <p itemprop="description" class="mt-3 mb-0">{{Description}}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h5 class="d-flex flex-wrap w-100 mt-sm-3 mt-2">
+                                                        <span class="badge badge-success font-weight-bold mb-2 mr-2">HD</span>
+                                                        <span class="badge badge-light font-weight-normal text-black pl-1 mr-2 mb-2">
+                                        <i class="far fa-clock"></i>&nbsp;{{Duration}} мин
+                                    </span>
+                                                        {{#if KinopoiskUrl}}
+                                                        <a href="{{KinopoiskUrl}}" class="badge bg-kp text-white mr-2 mb-2" target="_blank" style="background-color: #f60;">
+                                                            КиноПоиск
+                                                        </a>
+                                                        {{/if}}
+                                                        {{#if ImdbUrl}}
+                                                        <a href="{{ImdbUrl}}" class="badge bg-imdb text-black mr-2 mb-2" target="_blank" style="background-color: #f5c518;">
+                                                            IMDb
+                                                        </a>
+                                                        {{/if}}
+                                                    </h5>
+                                                </div>
+                                                <div itemscope itemprop="image" itemtype="https://schema.org/ImageObject" class="col-lg-4 col-md-5 d-none d-lg-block">
+                                                    <img class="movie-poster img-fluid rounded shadow mt-3 mb-3" src="{{PosterUrl}}" alt="{{Title}}" title="{{Title}}">
+                                                    <link itemprop="url contentUrl" href="{{PosterUrl}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
+
+
+                        <section class="container-fluid bg-black">
+                            <div class="row">
+                                <div class="col px-0">
+                                    <div class="container">
+
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        
+
+                                        <div class="row justify-content-center">
+                                            <div class="col-xs-12 col-md-11 col-sm-12 px-0">
+                                                <div class="player mh-640" style="overflow: hidden; position: relative;">
+                                                    <div class="player-fallback">
+                                                        <i class="fas fa-fw fa-5x fa-fire-alt fa-beat"></i>
+                                                    </div>
+                                                    <!-- Добавим data-атрибут для проверки -->
+                                                    <iframe
+                                                            width="100%"
+                                                            height="100%"
+                                                            frameborder="0"
+                                                            allowfullscreen="allowfullscreen"
+                                                            rel="nofollow"
+                                                            style="border: 0; margin: 0; padding: 0; overflow: hidden; position: absolute; top: 0; left: 0; right: 0; bottom: 0;"
+                                                            src="{{PlayerUrls}}"
+                                                            data-url="{{PlayerUrls}}">
+                                                    </iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!---->
+                                        <!---->
+                                        <div class="row justify-content-center player-list">
+                                            <div class="mt-2 mb-2 px-0 col-xs-12 col-md-11 col-sm-12">
+                                                <div class="d-flex flex-wrap pr-1 focusable">
+
+                                                    <button focusable="" type="button" class="btn btn-player flex-fill mr-0 mb-1 btn-danger" tabindex="-1">
+                                                        <small class="d-block">
+                                                            Плеер
+
+
+                                                        </small><!---->
+                                                        <strong class="text-capitalize">
+                                                            collaps
+
+                                                        </strong>
+
+                                                    </button>
+                                                    <!---->
+                                                    <button focusable="" type="button" class="btn btn-player flex-fill mr-0 mb-1 btn-dark" tabindex="-1">
+                                                        <small class="d-block">
+                                                            Плеер
+
+
+                                                        </small><!---->
+                                                        <strong class="text-capitalize">
+                                                            vibix
+
+                                                        </strong>
+
+                                                    </button>
+                                                    <!---->
+                                                    <button focusable="" type="button" class="btn btn-player flex-fill mr-0 mb-1 btn-dark" tabindex="-1">
+                                                        <small class="d-block">
+                                                            Плеер
+
+
+                                                        </small><!---->
+                                                        <strong class="text-capitalize">
+                                                            alloha
+
+                                                        </strong>
+
+                                                    </button>
+                                                    <!---->
+                                                    <button focusable="" type="button" class="btn btn-player flex-fill mr-0 mb-1 btn-dark" tabindex="-1">
+                                                        <small class="d-block">
+                                                            Плеер
+
+
+                                                        </small><!---->
+                                                        <strong class="text-capitalize">
+                                                            cdnmv
+
+                                                        </strong>
+
+                                                    </button>
+                                                    <!---->
+                                                    <button focusable="" type="button" class="btn btn-player flex-fill mr-0 mb-1 btn-dark" tabindex="-1">
+                                                        <small class="d-block">
+                                                            Плеер
+
+
+                                                        </small><!---->
+                                                        <strong class="text-capitalize">
+                                                            hdvb
+
+                                                        </strong>
+
+                                                    </button>
+                                                    <!---->
+                                                    <button focusable="" type="button" class="btn btn-player flex-fill mr-0 mb-1 btn-dark" tabindex="-1">
+                                                        <small class="d-block">
+                                                            Плеер
+
+
+                                                        </small><!---->
+                                                        <strong class="text-capitalize">
+                                                            videocdn
+
+                                                        </strong>
+
+                                                    </button>
+                                                    <!----><!---->
+                                                </div>
+                                            </div>
+                                        </div><!---->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+
+
+
+
+
+
+
+
+                    <section class="container bg-white py-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-11 col-sm-12">
+                                <div class="d-flex justify-content-between movie-actions">
+                                    <div class="mr-md-5" style="min-width: 150px;">
+                                        {{#if IsAuthorized}}
+                                        <!-- Блок для авторизованных пользователей -->
+                                        <button id="favoriteBtn" title="Избранное" class="btn btn-link text-decoration-none pl-0 mr-1 text-muted" tabindex="-1">
+                                            <i class="fa-fw fa-lg fa-bookmark far"></i><span class="d-none d-sm-inline-block">&nbsp;в избранные</span>
+                                        </button>
+                                        <button id="subscribeBtn" title="Подписка" class="btn btn-link text-decoration-none pl-0 mr-1 text-muted" tabindex="-1">
+                                            <i class="fa-fw fa-lg fa-bell far"></i><span class="d-none d-sm-inline-block">&nbsp;в подписки</span>
+                                        </button>
+                                        <script>
+                                            document.getElementById('favoriteBtn').addEventListener('click', function() {
+                                                this.querySelector('i').classList.toggle('fas');
+                                                this.querySelector('i').classList.toggle('far');
+                                                this.querySelector('i').classList.toggle('text-danger');
+                                            });
+
+                                            document.getElementById('subscribeBtn').addEventListener('click', function() {
+                                                this.querySelector('i').classList.toggle('fas');
+                                                this.querySelector('i').classList.toggle('far');
+                                                this.querySelector('i').classList.toggle('text-danger');
+                                            });
+                                        </script>
+                                        {{else}}
+                                        <!-- Блок для неавторизованных пользователей -->
+                                        <button title="Избранное" class="btn btn-link text-decoration-none pl-0 mr-1 text-muted" tabindex="-1">
+                                            <i class="fa-fw fa-lg fa-bookmark far"></i><span class="d-none d-sm-inline-block">&nbsp;в избранные</span>
+                                        </button>
+                                        <button title="Подписка" class="btn btn-link text-decoration-none pl-0 mr-1 text-muted" tabindex="-1">
+                                            <i class="fa-fw fa-lg fa-bell far"></i><span class="d-none d-sm-inline-block">&nbsp;в подписки</span>
+                                        </button>
+                                        <script>
+                                            document.querySelectorAll('.movie-actions button').forEach(button => {
+                                                button.addEventListener('click', function() {
+                                                    alert('Пожалуйста, войдите в аккаунт, чтобы использовать эту функцию.');
+                                                });
+                                            });
+                                        </script>
+                                        {{/if}}
+                                        <button title="Сообщить об ошибке" class="btn btn-link text-decoration-none pl-0 mr-1 text-muted" tabindex="-1">
+                                            <i class="fas fa-fw fa-lg fa-bug"></i><span class="d-none d-sm-inline-block">&nbsp;ошибка</span>
+                                        </button>
+                                        <button title="Отзывы" class="btn btn-link text-decoration-none pl-0 mr-1 text-muted" tabindex="-1">
+                                            <i class="fa-comments fa-fw fa-lg far"></i><span class="d-none d-sm-inline-block">&nbsp;отзывы</span>
+                                        </button>
+                                    </div>
+                                    <div class="text-right">
+                                        <button title="Просмотры" class="btn btn-link text-decoration-none pr-0 mr-1 text-muted" tabindex="-1">
+                                            <i class="fa-fw fa-lg fa-eye far"></i>&nbsp;1
+                                        </button>
+                                        <button title="Лайки" class="btn btn-link text-decoration-none pr-0 text-muted" tabindex="-1">
+                                            <i class="fa-fw fa-lg fa-heart far"></i>
+                                        </button>
+                                        <button class="btn btn-link text-decoration-none pr-0 mr-1 text-muted" tabindex="-1">
+                                            <i class="fas fa-fw fa-lg fa-share"></i>
+                                            <span class="d-none d-sm-inline-block">&nbsp;поделиться</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
+
+
+
+
+                    <section class="bg-white">
+                        <div class="container">
+                            <div class="row justify-content-md-center">
+                                <div class="col-md-11 col-sm-12">
+                                    <h5 class="h3 font-weight-bold my-4 ml-sm-2 ml-0">
+                                        Актеры
+                                        <small class="text-muted font-weight-bold" style="font-size: 1rem;">{{MovieActors.Count}}</small>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="scrolling-wrapper d-flex flex-row">
+                                    {{#each MovieActors}}
+                                    <div class="col col-person">
+                                        <div class="person-item mb-3">
+                                            <figure class="figure w-100">
+                                                <a rel="nofollow" href="#">
+                                                    <img class="figure-img img-fluid shadow border-0 w-100 fade rounded show" alt="{{Name}}" title="{{Name}}" src="{{PhotoUrl}}">
+                                                </a>
+                                                <figcaption class="figure-caption ml-2 mr-1">
+                                                    <div class="person-item-title">
+                                                        <a rel="nofollow" class="text-body font-weight-bolder text-decoration-none" href="#">
+                                                            {{Name}}
+                                                        </a>
+                                                    </div>
+                                                    <small>{{Role}}</small>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+
+
+                    <section class="container bg-white">
+                        <div class="row justify-content-center pb-4">
+                            <div class="col-md-10 col-sm-11">
+                                <h3 class="font-weight-bold my-4 ml-sm-2 ml-0">
+                                    Отзывы <span class="d-none d-sm-inline">к фильму</span>
+                                </h3>
+                                <div class="row">
+                                    <div class="col">
+                                        <!-- Форма отзыва -->
+                                        <div class="card border-0 bg-light shadow-sm mb-sm-3 mb-2">
+                                            <div class="card-body">
+                                                <form id="reviewForm" method="POST" action="/api/reviews" onsubmit="return validateForm()">
+                                                    <input type="hidden" name="movieId" value="{{Id}}">
+                                                    <div class="form-group">
+                                                        <label>Ваша оценка:</label>
+                                                        <div class="btn-group btn-group-lg btn-group-hover btn-block">
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="1">1</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="2">2</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="3">3</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="4">4</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="5">5</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="6">6</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="7">7</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="8">8</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="9">9</button>
+                                                            <button type="button" class="btn btn-white rating-btn" data-value="10">10</button>
+                                                        </div>
+                                                        <input type="hidden" name="rating" id="selectedRating" required>
+                                                        <div id="ratingError" class="text-danger mt-2" style="display: none;">
+                                                            Пожалуйста, выберите оценку
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Ваш отзыв:</label>
+                                                        <textarea name="content" rows="3" class="form-control bg-white" required></textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Ваше имя:</label>
+                                                        <input type="text" name="authorName" class="form-control bg-white" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-dark">Отправить отзыв</button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        <!-- Список отзывов -->
+                                        {{#if Reviews}}
+                                        <div class="reviews-list">
+                                            {{#each Reviews}}
+                                            <div class="card border-0 bg-light shadow-sm mb-sm-3 mb-2 mr-sm-3 mr-2 hover">
+                                                <div class="card-body pb-0">
+                                                    <p class="card-text text-break mb-0">{{Content}}</p>
+                                                    <div class="card-title font-weight-bold mb-3 mt-2">
+                                                        <div class="d-flex justify-content-between align-items-center">
+                                                            <div class="mr-1" style="line-height: 1.3;">
+                                            <span class="text-body font-weight-bold">
+                                                {{AuthorName}}
+                                                <div class="d-inline-block ml-1" title="оценка {{Rating}} из 10">
+                                                    {{#if (eq Rating 0)}}<i class="fas fa-lg fa-poop text-hankey"></i>{{/if}}
+                                                    {{#if (gte Rating 8)}}<i class="fas fa-lg fa-fire-alt text-danger"></i>{{/if}}
+                                                    {{#if (and (gte Rating 6) (lt Rating 8))}}<i class="far fa-lg fa-smile"></i>{{/if}}
+                                                    {{#if (and (gte Rating 4) (lt Rating 6))}}<i class="far fa-lg fa-meh"></i>{{/if}}
+                                                    {{#if (lt Rating 4)}}<i class="far fa-lg fa-frown"></i>{{/if}}
+                                                </div>
+                                            </span>
+                                                            </div>
+                                                            <div class="ml-1" style="line-height: 1.3;">
+                                                                <button type="button" class="btn btn-sm p-0" disabled>
+                                                                    <span class="d-none d-sm-inline text-muted mr-2">Ответить</span>
+                                                                    <i class="far fa-fw fa-lg fa-comments text-muted"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                        {{else}}
+                                        <div class="text-center text-muted my-4">
+                                            Пока нет отзывов. Будьте первым!
+                                        </div>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <style>
+                        .rating-btn {
+                            border: 1px solid #dee2e6;
+                            background-color: white;
+                        }
+
+                        .rating-btn.active {
+                            background-color: #007bff !important;
+                            color: white !important;
+                            border-color: #007bff !important;
+                        }
+
+                        .btn-group-hover .btn {
+                            flex: 1;
+                            padding: 0.5rem 0.25rem;
+                        }
+
+                        .hover:hover {
+                            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+                        }
+
+                        .review-content {
+                            white-space: pre-wrap;
+                        }
+
+                        .text-hankey {
+                            color: #825d41;
+                        }
+                    </style>
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const ratingButtons = document.querySelectorAll('.rating-btn');
+                            const selectedRating = document.getElementById('selectedRating');
+                            const ratingError = document.getElementById('ratingError');
+
+                            // Обработка клика по кнопкам рейтинга
+                            ratingButtons.forEach(button => {
+                                button.addEventListener('click', function() {
+                                    ratingButtons.forEach(btn => btn.classList.remove('active'));
+                                    this.classList.add('active');
+                                    selectedRating.value = this.dataset.value;
+                                    ratingError.style.display = 'none';
+                                });
+                            });
+                        });
+
+                        function validateForm() {
+                            const selectedRating = document.getElementById('selectedRating');
+                            const ratingError = document.getElementById('ratingError');
+                            const content = document.querySelector('textarea[name="content"]');
+                            const authorName = document.querySelector('input[name="authorName"]');
+
+                            if (!selectedRating.value) {
+                                ratingError.style.display = 'block';
+                                return false;
+                            }
+
+                            if (content.value.length < 3) {
+                                alert('Отзыв должен содержать минимум 3 символа');
+                                return false;
+                            }
+
+                            if (authorName.value.length < 2) {
+                                alert('Имя должно содержать минимум 2 символа');
+                                return false;
+                            }
+
+                            // Создаем объект с данными формы
+                            const formData = {
+                                movieId: document.querySelector('input[name="movieId"]').value,
+                                rating: selectedRating.value,
+                                content: encodeURIComponent(content.value),
+                                authorName: encodeURIComponent(authorName.value)
+                            };
+
+                            // Преобразуем объект в строку запроса
+                            const queryString = Object.keys(formData)
+                                .map(key => `${key}=${formData[key]}`)
+                                .join('&');
+
+                            // Отправляем данные
+                            fetch('/api/reviews', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                                },
+                                body: queryString
+                            })
+                                .then(response => {
+                                    if (response.redirected) {
+                                        window.location.href = response.url;
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Ошибка:', error);
+                                    alert('Произошла ошибка при отправке отзыва');
+                                });
+
+                            return false;
+                        }
+                    </script>
+                    
+                    
+                    
+                    <!-- Футер -->
+                    <section class="bg-black footer mt-auto">
+                        <div class="container">
+                            <div class="row justify-content-md-center">
+                                <div class="col-md-11 col-sm-12">
+                                    <div class="row mt-5 mb-5">
+                                        <div class="col-md-9">
+                                            <ul class="nav mt-1">
+                                                <li class="nav-item">
+                                                    <a routerlink="/policy" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                        Политика конфиденциальности
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a routerlink="/abuse" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                        Правообладателям
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a routerlink="/feedback" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                        Контакты
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a routerlink="/donate" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                        Донаты
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a routerlink="/apps" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                        Приложения
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a routerlink="/updates" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                        Обновления
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a routerlink="/persons" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                        База актеров
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a routerlink="/collections" routerlinkactive="active" class="nav-link text-light" href="#" onclick="return false;">
+                                                        Коллекции
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <ul class="nav justify-content-md-end mt-sm-0 mt-4">
+                                                <li class="nav-item">
+                                                    <a href="https://t.me/emblix" target="_blank" rel="noopener noreferrer nofollow" title="Телеграм" class="nav-link text-light">
+                                                        <i class="fab fa-fw fa-telegram-plane fa-2x"></i>
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="https://vk.com/emblix" target="_blank" rel="noopener noreferrer nofollow" title="ВКонтакте" class="nav-link text-light">
+                                                        <i class="fab fa-fw fa-vk fa-2x"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
